@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DOCKER_IMAGE="matrixdotorg/dendrite-monolith:latest"
-CONFIG_DIR="dendrite_config"
+CONFIG_DIR="config"
 
 source .env
 
