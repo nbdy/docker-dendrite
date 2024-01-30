@@ -21,7 +21,7 @@ if [ ! -f $CONFIG_DIR/dendrite.yaml ]; then
   docker run --rm --entrypoint="/bin/sh" -v $(pwd)/$CONFIG_DIR:/mnt $DOCKER_IMAGE \
     -c "/usr/bin/generate-config \
           -dir /var/dendrite \
-          -db postgres:///$POSTGRES_USER:$POSTGRES_PASSWORD@dendritedb/$dendrite?sslmode=disable \
+          -db postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@dendritedb/$dendrite?sslmode=disable \
           -server $DOMAIN > /mnt/dendrite.yaml"
 fi
 
