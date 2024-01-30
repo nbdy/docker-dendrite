@@ -23,7 +23,7 @@ services:
       - "8008:8008"
       - "8448:8448"
     volumes:
-      - config:/etc/dendrite
+      - dendrite_config:/etc/dendrite
       - dendrite_media:/var/dendrite/media
       - dendrite_jetstream:/var/dendrite/jetstream
       - dendrite_search_index:/var/dendrite/searchindex
@@ -39,6 +39,7 @@ networks:
     attachable: true
 
 volumes:
+  dendrite_config:
   dendrite_db:
   dendrite_postgres_data:
   dendrite_media:
