@@ -1,0 +1,45 @@
+version: "3.4"
+
+services:
+  db:
+    hostname: dendritedb
+    image: postgres:15-alpine
+    restart: always
+    volumes:
+      - dendrite_db:/var/lib/postresql/data
+    env_file:
+      - .env
+    networks:
+      - dendrite
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dendrite"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  server:
+    image: matrixdotorg/dendrite-monolith:latest
+    ports:
+      - "8008:8008"
+      - "8448:8448"
+    volumes:
+      - config:/etc/dendrite
+      - dendrite_media:/var/dendrite/media
+      - dendrite_jetstream:/var/dendrite/jetstream
+      - dendrite_search_index:/var/dendrite/searchindex
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - dendrite
+    restart: unless-stopped
+
+networks:
+  dendrite:
+    attachable: true
+
+volumes:
+  dendrite_postgres_data:
+  dendrite_media:
+  dendrite_jetstream:
+  dendrite_search_index:
