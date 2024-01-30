@@ -39,6 +39,7 @@ networks:
     attachable: true
 
 volumes:
+  dendrite_db:
   dendrite_postgres_data:
   dendrite_media:
   dendrite_jetstream:
