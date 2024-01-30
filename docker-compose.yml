@@ -28,7 +28,7 @@ services:
       - dendrite_jetstream:/var/dendrite/jetstream
       - dendrite_search_index:/var/dendrite/searchindex
     depends_on:
-      postgres:
+      db:
         condition: service_healthy
     networks:
       - dendrite
